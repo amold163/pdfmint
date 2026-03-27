@@ -1,0 +1,5 @@
+{
+  "name": "PDFmint",
+  "description": "A fast, minimal, and privacy-first platform for all your PDF needs. Merge, split, compress, and convert PDFs entirely in your browser.",
+  "requestFramePermissions": []
+}
