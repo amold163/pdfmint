@@ -16,8 +16,8 @@ export const Navbar = () => {
         
         <div className="hidden items-center gap-8 md:flex">
           <Link to="/" className="text-sm font-medium text-zinc-600 hover:text-indigo-600">Tools</Link>
-          <a href="#" className="text-sm font-medium text-zinc-600 hover:text-indigo-600">Pricing</a>
-          <a href="#" className="text-sm font-medium text-zinc-600 hover:text-indigo-600">API</a>
+          <Link to="/about" className="text-sm font-medium text-zinc-600 hover:text-indigo-600">About</Link>
+          <Link to="/contact" className="text-sm font-medium text-zinc-600 hover:text-indigo-600">Contact</Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -68,10 +68,10 @@ export const Footer = () => {
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-900">Company</h3>
             <ul className="space-y-2 text-sm text-zinc-500">
-              <li><a href="#" className="hover:text-indigo-600">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-indigo-600">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-indigo-600">Contact Us</a></li>
-              <li><a href="#" className="hover:text-indigo-600">About</a></li>
+              <li><Link to="/privacy" className="hover:text-indigo-600">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="hover:text-indigo-600">Terms of Service</Link></li>
+              <li><Link to="/contact" className="hover:text-indigo-600">Contact Us</Link></li>
+              <li><Link to="/about" className="hover:text-indigo-600">About</Link></li>
             </ul>
           </div>
         </div>

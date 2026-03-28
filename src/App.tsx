@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar, Footer } from './components/Layout';
 import { Home } from './pages/Home';
 import { ToolPage } from './pages/ToolPage';
+import { About } from './pages/About';
+import { Privacy } from './pages/Privacy';
+import { Terms } from './pages/Terms';
+import { Contact } from './pages/Contact';
 
 export default function App() {
   return (
@@ -12,6 +16,10 @@ export default function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/:toolId" element={<ToolPage />} />
             {/* Fallback for SEO routes that might be nested */}
             <Route path="/tools/:toolId" element={<ToolPage />} />
