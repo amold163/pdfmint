@@ -38,6 +38,7 @@ interface ToolConfig {
   usageGuide: string[];
   faqs: FAQ[];
   internalLinks: { label: string; path: string }[];
+  comingSoon?: boolean;
 }
 
 const toolConfigs: Record<string, ToolConfig> = {
@@ -531,7 +532,8 @@ const toolConfigs: Record<string, ToolConfig> = {
       { label: 'Split PDF Privately', path: '/split-pdf' },
       { label: 'Secure PDF Password', path: '/add-password' },
       { label: 'Merge PDF Securely', path: '/merge-pdf' }
-    ]
+    ],
+    comingSoon: true
   }
 };
 
@@ -551,6 +553,45 @@ export const ToolPage = () => {
       <div className="flex min-h-[60vh] flex-col items-center justify-center">
         <h2 className="text-2xl font-bold">Tool not found</h2>
         <Link to="/" className="mt-4 text-indigo-600 hover:underline">Back to home</Link>
+      </div>
+    );
+  }
+
+  if (config.comingSoon) {
+    return (
+      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+        <Helmet>
+          <title>{config.metaTitle}</title>
+          <meta name="description" content={config.metaDescription} />
+        </Helmet>
+        
+        <Link to="/" className="mb-8 inline-flex items-center text-sm font-medium text-zinc-500 hover:text-indigo-600">
+          <ArrowLeft size={16} className="mr-2" /> Back to all tools
+        </Link>
+
+        <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-zinc-200 bg-zinc-50 py-24 text-center">
+          <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-600">
+            <Settings size={40} className="animate-spin-slow" />
+          </div>
+          <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-5xl">
+            {config.title} is <span className="text-indigo-600">Coming Soon</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-zinc-600">
+            We're working hard to bring you the most secure, private, and powerful PDF editor. Stay tuned for a browser-based editing experience that keeps your data 100% safe.
+          </p>
+          <Link 
+            to="/"
+            className="mt-10 inline-flex items-center rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition-all hover:bg-indigo-700 hover:shadow-xl"
+          >
+            Explore other tools
+          </Link>
+        </div>
+
+        {/* SEO Content still visible for indexing */}
+        <div className="mt-20 opacity-50 grayscale pointer-events-none">
+          <h2 className="text-2xl font-bold text-zinc-900 mb-6">{config.h1}</h2>
+          <p className="text-zinc-600 mb-8">{config.intro}</p>
+        </div>
       </div>
     );
   }

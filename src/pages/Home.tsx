@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { 
   Merge, 
   Scissors, 
@@ -11,6 +12,7 @@ import {
   Lock, 
   Unlock, 
   Type,
+  Edit,
   Search,
   ArrowRight,
   ShieldCheck,
@@ -100,6 +102,15 @@ const tools = [
     icon: <Type size={24} />,
     color: 'bg-cyan-50 text-cyan-600',
     path: '/add-watermark'
+  },
+  {
+    id: 'edit-pdf',
+    name: 'Edit PDF',
+    description: 'Add text, images, and annotations to your PDF files.',
+    icon: <Edit size={24} />,
+    color: 'bg-purple-50 text-purple-600',
+    path: '/edit-pdf',
+    comingSoon: true
   }
 ];
 
@@ -113,6 +124,11 @@ export const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>PDFMint - 100% Private PDF Tools | No File Upload Required</title>
+        <meta name="description" content="The most secure PDF toolkit online. Merge, split, compress, and convert PDFs without uploading to any server. 100% private, browser-based PDF tools for maximum data security." />
+        <link rel="canonical" href="https://pdfmint.in/" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-zinc-50 py-20 lg:py-32">
         <div className="absolute inset-0 z-0 opacity-30">
@@ -170,17 +186,30 @@ export const Home = () => {
               transition={{ duration: 0.3, delay: index * 0.05 }}
             >
               <Link 
-                to={tool.path}
-                className="group flex h-full flex-col rounded-2xl border border-zinc-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-indigo-100 hover:shadow-xl hover:shadow-indigo-500/10"
+                to={tool.comingSoon ? '#' : tool.path}
+                onClick={(e) => tool.comingSoon && e.preventDefault()}
+                className={cn(
+                  "group flex h-full flex-col rounded-2xl border border-zinc-100 bg-white p-6 shadow-sm transition-all",
+                  tool.comingSoon ? "cursor-not-allowed opacity-75" : "hover:-translate-y-1 hover:border-indigo-100 hover:shadow-xl hover:shadow-indigo-500/10"
+                )}
               >
-                <div className={cn("mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-transform group-hover:scale-110", tool.color)}>
-                  {tool.icon}
+                <div className="flex items-start justify-between">
+                  <div className={cn("mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-transform", !tool.comingSoon && "group-hover:scale-110", tool.color)}>
+                    {tool.icon}
+                  </div>
+                  {tool.comingSoon && (
+                    <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                      Coming Soon
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-lg font-bold text-zinc-900">{tool.name}</h3>
                 <p className="mt-2 flex-grow text-sm text-zinc-500">{tool.description}</p>
-                <div className="mt-6 flex items-center text-sm font-semibold text-indigo-600 opacity-0 transition-opacity group-hover:opacity-100">
-                  Try it now <ArrowRight size={16} className="ml-1" />
-                </div>
+                {!tool.comingSoon && (
+                  <div className="mt-6 flex items-center text-sm font-semibold text-indigo-600 opacity-0 transition-opacity group-hover:opacity-100">
+                    Try it now <ArrowRight size={16} className="ml-1" />
+                  </div>
+                )}
               </Link>
             </motion.div>
           ))}
